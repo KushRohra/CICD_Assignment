@@ -8,6 +8,8 @@ on:
 jobs:
   pull_and_test:
     runs-on: ubuntu-latest
+    needs: build_and_push
+    if: ${{ needs.build_and_push.outputs.success == 'true' }}
     defaults:
       run:
         shell: bash

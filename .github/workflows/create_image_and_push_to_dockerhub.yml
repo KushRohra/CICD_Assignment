@@ -24,3 +24,12 @@ jobs:
       
       - name: Push Docker image
         run: docker push kushrohra/kushrohra_assignment3_solution
+
+      - name: Set output
+        id: set_output
+        run: echo "::set-output name=success::true"
+
+outputs:
+  success:
+    description: 'Whether the build and push were successful'
+    value: ${{ steps.set_output.outputs.success }}
