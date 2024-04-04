@@ -9,7 +9,7 @@ jobs:
   pull_and_test:
     runs-on: ubuntu-latest
     needs: build_and_push
-    if: ${{ needs.build_and_push.outputs.success == 'true' }}
+    if: success() == 'true'
     defaults:
       run:
         shell: bash
@@ -29,3 +29,10 @@ jobs:
       - name: Run Docker container and test score
         run: |
           docker run --rm kushrohra/kushrohra_assignment3_solution
+
+functions:
+  success:
+    description: Check if the build_and_push job was successful
+    returns: 'true' if the first workflow was successfull, otherwise 'false'
+    runs: |
+      return process.env.BUILD_AND_PUSH_SUCCESS === 'true' ? 'true' : 'false'

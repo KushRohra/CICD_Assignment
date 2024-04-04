@@ -25,11 +25,6 @@ jobs:
       - name: Push Docker image
         run: docker push kushrohra/kushrohra_assignment3_solution
 
-      - name: Set output
-        id: set_output
-        run: echo "::set-output name=success::true"
-
-outputs:
-  success:
-    description: 'Whether the build and push were successful'
-    value: ${{ steps.set_output.outputs.success }}
+      - name: Set success flag
+        if: success() == 'true'
+        run: echo "BUILD_AND_PUSH_SUCCESS=true" >> $GITHUB_ENV
