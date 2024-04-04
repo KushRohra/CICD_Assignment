@@ -30,9 +30,6 @@ jobs:
         run: |
           docker run --rm kushrohra/kushrohra_assignment3_solution
 
-functions:
-  success:
-    description: Check if the build_and_push job was successful
-    returns: 'true' if the first workflow was successful, otherwise 'false'
-    runs: |
-      echo "::set-output name=success::${{ env.BUILD_AND_PUSH_SUCCESS }}"
+      - name: Set success output
+        if: success() == 'true'
+        run: echo "::set-output name=success::true"
