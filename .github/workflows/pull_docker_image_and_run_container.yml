@@ -3,11 +3,20 @@ name: Pull and Test Docker Image
 on:
   pull_request:
     branches:
-      - main  # Adjust if your main branch has a different name
+      - main
 
 jobs:
   pull_and_test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./
+    steps:
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
 
     steps:
       - name: Checkout repository
