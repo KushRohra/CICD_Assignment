@@ -33,6 +33,6 @@ jobs:
 functions:
   success:
     description: Check if the build_and_push job was successful
-    returns: 'true' if the first workflow was successfull, otherwise 'false'
+    returns: 'true' if the first workflow was successful, otherwise 'false'
     runs: |
-      return process.env.BUILD_AND_PUSH_SUCCESS === 'true' ? 'true' : 'false'
+      echo "::set-output name=success::${{ env.BUILD_AND_PUSH_SUCCESS }}"
