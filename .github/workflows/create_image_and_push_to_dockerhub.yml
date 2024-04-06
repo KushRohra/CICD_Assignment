@@ -39,7 +39,7 @@ jobs:
           node-version: '16.x'
 
       - name: Pull Docker image
-        run: docker pull kushrohra/kushrohra_assignment3_solution
+        run: docker pull kushrohra/kushrohra_assignment3_solution1
 
       - name: Run Docker container and test score
         run: |
