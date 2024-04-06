@@ -23,7 +23,7 @@ jobs:
         run: docker build -t kushrohra/kushrohra_assignment3_solution .
       
       - name: Push Docker image
-        run: docker push kushrohra/kushrohra_assignment3_solution
+        run: docker push kushrohra/kushrohra_assignment3_solution1
   
   pull_and_test:
     runs-on: ubuntu-latest
@@ -39,7 +39,7 @@ jobs:
           node-version: '16.x'
 
       - name: Pull Docker image
-        run: docker pull kushrohra/kushrohra_assignment3_solution1
+        run: docker pull kushrohra/kushrohra_assignment3_solution
 
       - name: Run Docker container and test score
         run: |
