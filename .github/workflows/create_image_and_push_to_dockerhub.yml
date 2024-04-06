@@ -23,7 +23,7 @@ jobs:
         run: docker build -t kushrohra/kushrohra_assignment3_solution .
       
       - name: Push Docker image
-        run: docker push kushrohra/kushrohra_assignment3_solution1
+        run: docker push kushrohra/kushrohra_assignment3_solution
   
   pull_and_test:
     runs-on: ubuntu-latest
