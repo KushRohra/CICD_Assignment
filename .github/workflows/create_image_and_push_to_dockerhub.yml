@@ -24,3 +24,28 @@ jobs:
       
       - name: Push Docker image
         run: docker push kushrohra/kushrohra_assignment3_solution
+  
+  pull_and_test:
+    runs-on: ubuntu-latest
+    needs: build_and_push
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+
+      - name: Pull Docker image
+        run: docker pull kushrohra/kushrohra_assignment3_solution
+
+      - name: Run Docker container and test score
+        run: |
+          score=$(docker run --rm kushrohra/kushrohra_assignment3_solution)
+          echo "::set-output name=score::$score"
+          if [[ `echo "$score 0.30" | awk '{print ($1 < $2)}'` == 1 ]]; then
+            echo "Insufficient Accuracy"
+            exit 1
+          fi
