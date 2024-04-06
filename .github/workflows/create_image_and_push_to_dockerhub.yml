@@ -1,4 +1,4 @@
-name: Build image and push it to DockerHub
+name: Train
 
 on:
   pull_request:
@@ -24,7 +24,3 @@ jobs:
       
       - name: Push Docker image
         run: docker push kushrohra/kushrohra_assignment3_solution
-
-      - name: Set success flag
-        if: success() == 'true'
-        run: echo "BUILD_AND_PUSH_SUCCESS=true" >> $GITHUB_ENV

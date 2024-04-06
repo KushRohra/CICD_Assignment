@@ -1,4 +1,4 @@
-name: Pull and Test Docker Image
+name: Test
 
 on:
   pull_request:
@@ -8,7 +8,9 @@ on:
 jobs:
   pull_and_test:
     runs-on: ubuntu-latest
-    
+    needs: Train
+    if: success('Train') == 'true'
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -29,3 +31,10 @@ jobs:
             echo "Insufficient Accuracy"
             exit 1
           fi
+
+functions:
+  success:
+    description: Check if the Train job was successful
+    returns: 'true' if successful, otherwise 'false'
+    runs: |
+      return ${{ job.status }} == 'completed' && steps.Train.outcome == 'success'
